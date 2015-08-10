@@ -1,0 +1,1 @@
+Simple test for learn how to make easy mods with formspec in Minetest
