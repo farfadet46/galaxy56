@@ -1449,6 +1449,7 @@ minetest.register_node("default:brick", {
 --
 -- Misc
 --
+--[[
 
 minetest.register_node("default:cloud", {
 	description = "Cloud",
@@ -1479,3 +1480,4 @@ minetest.register_node("default:nyancat_rainbow", {
 	is_ground_content = false,
 	sounds = default.node_sound_defaults(),
 })
+]]--
