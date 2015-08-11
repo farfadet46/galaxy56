@@ -88,13 +88,6 @@ minetest.register_node("farming:straw", {
 	sounds = default.node_sound_leaves_defaults(),
 })
 
-minetest.register_node("farmng:Wool:", {
-		description = "Laine",
-		tiles = {"Laine_blanche".png"},
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
-		sounds = default.node_sound_defaults(),
-	})
-
 minetest.register_abm({
 	nodenames = {"group:field"},
 	interval = 15,
