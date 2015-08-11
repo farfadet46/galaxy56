@@ -15,10 +15,11 @@ galaxy_spikes.register_spike = function(color)
 	
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"group:stone","group:dirt","group:sand","group:grass"},
-		sidelen = 80,
+		place_on = {"group:stone","group:dirt","group:sand","default:dirt_with_grass"},
+		sidelen = 8,
 		y_min = -31000,
 		y_max = 31000,
+		--fill_ratio = 0.02,
 		decoration = "galaxy_spikes:spike_"..color,
 	})
 	--[[
