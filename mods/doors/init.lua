@@ -482,6 +482,7 @@ function doors.register_trapdoor(name, def)
 		minetest.set_node(pos, {name = newname, param1 = node.param1, param2 = node.param2})
 	end
 
+	local screwdriver = nil
 	def.on_rotate = minetest.get_modpath("screwdriver") and screwdriver.rotate_simple
 
 	-- Common trapdoor configuration
