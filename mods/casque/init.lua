@@ -53,7 +53,7 @@ function porte_casque(player)
 	casque[player:get_player_name()] = player:hud_add({
 		hud_elem_type = "image",
 		name="casque",
-		scale = {x=1 , y=1},
+		scale = {x=100 , y=-100},
 		alignment = { x=0, y=0 },
 		offset = { x=0, y=0 },
 		position =  { x=0.5, y=0.5 },
