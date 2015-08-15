@@ -5,6 +5,7 @@ casque = {}
 local casque_actif = true
 
 minetest.register_on_joinplayer(function(player)
+	-- toujours porte le casque au début de la partie
 	porte_casque(player)
 end)
 
@@ -18,11 +19,9 @@ minetest.register_chatcommand("casque",{
 				if casque_actif == true then
 					minetest.chat_send_player(name,"Vous portez deja votre casque")
 					return
-				elseif casque_actif == false then
-					minetest.chat_send_player(name,"Vous avez mis votre casque")
-					
+				elseif casque_actif == false then					
 					porte_casque(player)
-					
+					minetest.chat_send_player(name,"Vous avez mis votre casque")
 					casque_actif = true
 					return
 				end
@@ -30,8 +29,8 @@ minetest.register_chatcommand("casque",{
 -- Sinon si le joueur veut enlever son casque
 			elseif param == "off" then
 				if casque_actif == true then --on porte le casque
+					enleve_casque(player)
 					minetest.chat_send_player(name,"Vous avez enlevé votre casque")
-					player:hud_remove(casque[player:get_player_name()])
 					casque_actif = false
 					return
 				elseif casque_actif == false then --on ne porte pas le casque
@@ -57,7 +56,31 @@ function porte_casque(player)
 		alignment = { x=0, y=0 },
 		offset = { x=0, y=0 },
 		position =  { x=0.5, y=0.5 },
-		text = "casque.png" -- text = image a placer
+		text = "casque.png" -- text = nom de l'image.
 		})
+		minetest.sound_play("casque_respire")
 end
 	
+function enleve_casque(player)
+	local numParticles =  100
+	local playerPos = player:getpos()
+	
+	player:hud_remove(casque[player:get_player_name()])
+		
+	for i=1, numParticles, 1 do
+		minetest.add_particle({
+			pos = {x=playerPos["x"]+math.random(-1,1)*math.random()/2,y=playerPos["y"]+1.5,z=playerPos["z"]+math.random(-1,1)*math.random()/2},
+			--pos = {x=0, y=0, z=0},
+			--vel = {x=0, y=5, z=0},
+			vel = {x=math.random(-5,5), y=math.random(-5,5), z=math.random(-5,5)},
+			acc = {x=0, y=-13, z=0},
+			expirationtime = math.random(),
+			size = math.random()+0.5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "default_wood.png",
+		})
+	end
+	-- petit son qui rajoute du réalisme.
+	minetest.sound_play("casque_sound")
+end
