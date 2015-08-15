@@ -78,7 +78,7 @@ function enleve_casque(player)
 			size = math.random()+0.5,
 			collisiondetection = false,
 			vertical = false,
-			texture = "default_wood.png",
+			texture = "bubble.png",
 		})
 	end
 	-- petit son qui rajoute du réalisme.
