@@ -8,8 +8,14 @@ galaxy_spikes.register_spike = function(color)
 		inventory_image = "spike.png^[colorize:"..color..":100",
 		paramtype = "light",
 		walkable = false,
+		buildable_to = true,
 		--damage_per_second = 4, -- no damage, just deco.
 		groups = {crumbly=3, fruit = 1},
+		selection_box = {
+			type = "fixed",
+			--fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+			fixed = {-0.3, -0.5, -0.3, 0.3, -0.1, 0.3},
+		},
 	})
 
 	
