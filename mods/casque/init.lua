@@ -22,7 +22,6 @@ minetest.register_chatcommand("casque",{
 				elseif casque_actif == false then					
 					porte_casque(player)
 					minetest.chat_send_player(name,"Vous avez mis votre casque")
-					casque_actif = true
 					return
 				end
 				
@@ -31,7 +30,6 @@ minetest.register_chatcommand("casque",{
 				if casque_actif == true then --on porte le casque
 					enleve_casque(player)
 					minetest.chat_send_player(name,"Vous avez enlevé votre casque")
-					casque_actif = false
 					return
 				elseif casque_actif == false then --on ne porte pas le casque
 					minetest.chat_send_player(name,"Vous ne portez pas encore votre casque")
@@ -84,7 +82,7 @@ function enleve_casque(player)
 	end
 	-- petit son qui rajoute du réalisme.
 	minetest.sound_play("casque_sound")
-	casque_actif = fasle
+	casque_actif = false
 end
 
 unified_inventory.register_button("casque", {
