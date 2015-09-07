@@ -59,6 +59,7 @@ function porte_casque(player)
 		text = "casque.png" -- text = nom de l'image.
 		})
 		minetest.sound_play("casque_respire")
+	casque_actif = true
 end
 	
 function enleve_casque(player)
@@ -83,4 +84,18 @@ function enleve_casque(player)
 	end
 	-- petit son qui rajoute du réalisme.
 	minetest.sound_play("casque_sound")
+	casque_actif = fasle
 end
+
+unified_inventory.register_button("casque", {
+	type = "image",
+	image = "btn_casque.png",
+	tooltip = "Porter-Enlever le casque",
+	action = function(player)
+		if casque_actif == true then
+			enleve_casque(player)
+		else
+			porte_casque(player)
+		end
+	end,
+})
