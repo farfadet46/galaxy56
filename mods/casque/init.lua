@@ -8,7 +8,7 @@ minetest.register_on_joinplayer(function(player)
 	-- toujours porte le casque au début de la partie
 	porte_casque(player)
 end)
-
+--[[
 minetest.register_chatcommand("casque",{
 	desciption = "porter / enlever le casque",
 		func = function( name , param)
@@ -45,7 +45,8 @@ minetest.register_chatcommand("casque",{
 		return true
 	end,
 	})
-	
+]]--
+
 function porte_casque(player)
 	casque[player:get_player_name()] = player:hud_add({
 		hud_elem_type = "image",
