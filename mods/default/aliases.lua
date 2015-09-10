@@ -44,6 +44,7 @@ minetest.register_alias("nyancat_rainbow", "default:nyancat_rainbow")
 minetest.register_alias("sapling", "default:sapling")
 minetest.register_alias("apple", "default:apple")
 
+--[[
 minetest.register_alias("WPick", "default:pick_wood")
 minetest.register_alias("STPick", "default:pick_stone")
 minetest.register_alias("SteelPick", "default:pick_steel")
@@ -55,6 +56,7 @@ minetest.register_alias("WAxe", "default:axe_wood")
 minetest.register_alias("STAxe", "default:axe_stone")
 minetest.register_alias("SteelAxe", "default:axe_steel")
 minetest.register_alias("WSword", "default:sword_wood")
+]]--
 minetest.register_alias("STSword", "default:sword_stone")
 minetest.register_alias("SteelSword", "default:sword_steel")
 
