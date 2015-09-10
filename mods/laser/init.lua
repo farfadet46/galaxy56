@@ -1,17 +1,45 @@
---local old_on_use = nil
+-- (c)2015 @farfadet46
+-- Minetest mod : laser
+
+local function allow_metadata_inventory_take(pos, listname, index, stack, player)
+	--if minetest.is_protected(pos, player:get_player_name()) then
+		return 0
+	--end
+	--return stack:get_count()
+end
 
 minetest.register_tool("laser:epee_sword", {
 	description = "Laser Sword",
-	inventory_image = "laser_epee_laser.png",
+	inventory_image = "laser.png",
+	wield_image = "laser.png",
+	wield_scale = {x=1/16, y=12, z=1/4},
+		
+	on_drop = function(itemstack, dropper, pos)
+		return
+		end,
+
+	on_use = function(itemstack, user, pointed_thing)
+		if pointed_thing ~= nil then
+			local pos = minetest.get_pointed_thing_position(pointed_thing)
+			local node = minetest.get_node(pos)
+			if node.name then
+				-- local name = node.name:gsub("^.+:", "micronode:")
+				-- if minetest.registered_items[name] then
+				--	local stack = {name=name, count=MICRONODE_STACK_MAX}
+					local inv = user:get_inventory()
+					if inv then
+						inv:add_item("main", node.name)
+					end
+					minetest.remove_node(pos)
+					minetest.sound_play("laser")
+			--	end
+			end
+			--itemstack:add_wear(MICRONODE_LASER_WEAR)
+			return itemstack
+		end
+	end,
 	
-	--old_on_use = on_use or function() end, 
-		
-	on_punch = function(itemstack, user, pointed_thing) 
-	--	old_on_use(itemstack, user, pointed_thing) 
-		minetest.sound_play("laser_sound", {pos = pointed_thing, gain = 0.5,})
-		
-		--return
-	end, 
+	allow_metadata_inventory_take = allow_metadata_inventory_take,
 	
 	tool_capabilities = {
 		full_punch_interval = 0.1,
