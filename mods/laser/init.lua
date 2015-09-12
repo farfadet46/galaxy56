@@ -1,14 +1,13 @@
 -- (c)2015 @farfadet46
 -- Minetest mod : laser
 
-minetest.register_alias("laser:epee_sw", "default:hand")
+--ne fonctionne pas :/
+minetest.register_alias("default:hand","laser:laser")
 
 local function allow_metadata_inventory_take(pos, listname, index, stack, player)
-	--if minetest.is_protected(pos, player:get_player_name()) then
-		return 0
-	--end
-	--return stack:get_count()
+	return 0
 end
+
 
 minetest.register_tool("laser:laser", {
 	description = "Foreuse laser",
@@ -27,9 +26,6 @@ minetest.register_tool("laser:laser", {
 		else
 		local node = minetest.get_node(pos)
 			if node.name then
-			-- local name = node.name:gsub("^.+:", "micronode:")
-			-- if minetest.registered_items[name] then
-			--	local stack = {name=name, count=MICRONODE_STACK_MAX}
 				local inv = user:get_inventory()
 				if inv then
 					inv:add_item("main", node.name)
@@ -38,7 +34,6 @@ minetest.register_tool("laser:laser", {
 				minetest.sound_play("laser")
 			end
 		end
-		--itemstack:add_wear(MICRONODE_LASER_WEAR)
 		return itemstack
 	end,
 	
@@ -54,13 +49,3 @@ minetest.register_tool("laser:laser", {
 		}
 	}
 })
---[[
-minetest.register_craft({
-	output = 'laser:laser',
-	recipe = {
-		{'default:glass'},
-		{'default:mese'},
-		{'default:stick'},
-	}
-})
-]]--
