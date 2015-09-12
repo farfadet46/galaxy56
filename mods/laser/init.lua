@@ -1,6 +1,8 @@
 -- (c)2015 @farfadet46
 -- Minetest mod : laser
 
+minetest.register_alias("laser:epee_sw", "default:hand")
+
 local function allow_metadata_inventory_take(pos, listname, index, stack, player)
 	--if minetest.is_protected(pos, player:get_player_name()) then
 		return 0
@@ -8,8 +10,8 @@ local function allow_metadata_inventory_take(pos, listname, index, stack, player
 	--return stack:get_count()
 end
 
-minetest.register_tool("laser:epee_sword", {
-	description = "Laser Sword",
+minetest.register_tool("laser:laser", {
+	description = "Foreuse laser",
 	inventory_image = "laser.png",
 	wield_image = "laser.png",
 	wield_scale = {x=1/16, y=12, z=1/4},
@@ -52,12 +54,13 @@ minetest.register_tool("laser:epee_sword", {
 		}
 	}
 })
-
+--[[
 minetest.register_craft({
-	output = 'laser:epee_laser',
+	output = 'laser:laser',
 	recipe = {
 		{'default:glass'},
 		{'default:mese'},
 		{'default:stick'},
 	}
 })
+]]--
