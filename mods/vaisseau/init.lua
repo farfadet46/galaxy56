@@ -7,6 +7,18 @@ unified_inventory.register_button("vaisseau", {
 	tooltip = "Se téléporter au vaisseau",
 	action = function(player)
 		local name = player:get_player_name()
+		--[[
+		local player_name = player:get_player_name()
+			if minetest.check_player_privs(player_name, {home=true}) then
+				minetest.sound_play("teleport",
+					{to_player=player:get_player_name(), gain = 1.0})
+				unified_inventory.go_home(player)
+			else
+				minetest.chat_send_player(player_name,
+					S("You don't have the \"home\" privilege!"))
+			end
+			]]--
+			player:setpos()
 		minetest.chat_send_player(name, "vous ne disposez pas de la technologie de TP, revenez dans 256 années.")
 	end,
 	
