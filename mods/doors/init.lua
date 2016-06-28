@@ -344,24 +344,6 @@ function doors.register_door(name, def)
 
 end
 
-doors.register_door("doors:door_wood", {
-	description = "Wooden Door",
-	inventory_image = "doors_wood.png",
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=2,door=1},
-	tiles_bottom = {"doors_wood_b.png", "doors_brown.png"},
-	tiles_top = {"doors_wood_a.png", "doors_brown.png"},
-	sounds = default.node_sound_wood_defaults(),
-	sunlight = false,
-})
-
-minetest.register_craft({
-	output = "doors:door_wood",
-	recipe = {
-		{"group:wood", "group:wood"},
-		{"group:wood", "group:wood"},
-		{"group:wood", "group:wood"}
-	}
-})
 
 doors.register_door("doors:door_steel", {
 	description = "Steel Door",
@@ -418,27 +400,6 @@ minetest.register_craft({
 		{"default:obsidian_glass", "default:obsidian_glass"},
 		{"default:obsidian_glass", "default:obsidian_glass"},
 		{"default:obsidian_glass", "default:obsidian_glass"}
-	}
-})
-
--- From BFD: Cherry planks doors
-
-doors.register_door("doors:door_cherry", {
-	description = "Cherry Door",
-	inventory_image = "doors_wood_cherry.png",
-	groups = {choppy=2,oddly_breakable_by_hand=2,flammable=2,door=1},
-	tiles_bottom = {"doors_wood_cherry_b.png", "default_wood_cherry_planks.png"},
-	tiles_top = {"doors_wood_cherry_a.png", "default_wood_cherry_planks.png"},
-	sounds = default.node_sound_wood_defaults(),
-	sunlight = false,
-})
-
-minetest.register_craft({
-	output = "doors:door_cherry",
-	recipe = {
-		{"default:cherry_plank", "default:cherry_plank"},
-		{"default:cherry_plank", "default:cherry_plank"},
-		{"default:cherry_plank", "default:cherry_plank"}
 	}
 })
 
@@ -545,25 +506,3 @@ minetest.register_craft({
 	}
 })
 
-doors.register_trapdoor("doors:trapdoor_cherry", {
-	description = "Cherry tree trapdoor",
-	inventory_image = "doors_trapdoor_cherry.png",
-	wields_images = "doors_trapdoor_cherry.png",
-	tile_front = "doors_trapdoor_cherry.png",
-	tile_side = "default_wood_cherry_planks.png",
-	groups = {snappy=1, choppy=2, oddly_breakable_by_hand=2, flammable=2, door=1},
-	sounds = default.node_sound_wood_defaults(),
-	sound_open = "doors_door_open",
-	sound_close = "doors_door_close"
-})
-
-minetest.register_craft({
-	output = 'doors:trapdoor_cherry 2',
-	recipe = {
-		{'default:cherry_plank', 'default:cherry_plank', 'default:cherry_plank'},
-		{'default:cherry_plank', 'default:cherry_plank', 'default:cherry_plank'},
-	}
-})
-
--- door 3 nodes
-dofile(minetest.get_modpath("doors").."/doors3.lua")

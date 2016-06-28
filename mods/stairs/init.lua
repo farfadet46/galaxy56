@@ -212,6 +212,13 @@ function stairs.register_stair_and_slab(subname, recipeitem, groups, images, des
 	stairs.register_slab(subname, recipeitem, groups, images, desc_slab, sounds)
 end
 
+stairs.register_stair_and_slab("dirt", "default:dirt",
+		{cracky=3},
+		{"default_dirt.png"},
+		"Dirt Stair",
+		"Dirt Slab",
+		default.node_sound_dirt_defaults())
+		
 stairs.register_stair_and_slab("wood", "default:wood",
 		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 		{"default_wood.png"},
@@ -308,4 +315,11 @@ stairs.register_stair_and_slab("obsidianbrick", "default:obsidianbrick",
 		{"default_obsidian_brick.png"},
 		"Obsidian Brick Stair",
 		"Obsidian Brick Slab",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("steelblock", "default:steelblock",
+		{cracky=1,level=2},
+		{"default_steel_block.png"},
+		"Steel Block Stair",
+		"Steel Block Slab",
 		default.node_sound_stone_defaults())
