@@ -8,10 +8,10 @@ local function allow_metadata_inventory_take(pos, listname, index, stack, player
 	return 0
 end
 ]]--
-local mod_name = minetest.get_current_modname()
 
-minetest.register_tool(mod_name .. ":laser", {
-	description = "Foreuse laser",
+minetest.register_tool( ":", {
+
+--	description = "Foreuse laser",
 	inventory_image = "laser.png",
 	wield_image = "laser.png",
 	wield_scale = {x=1/16, y=12, z=1/4},
@@ -26,12 +26,14 @@ minetest.register_tool(mod_name .. ":laser", {
 		}
 	},
 	
+	--don't drop this item (need to find an idea to put it as a hand tool :)
 	on_drop = function(itemstack, dropper, pos)
 		return
-		end,
+	end,
 
 	on_use = function(itemstack, user, pointed_thing)
 		local pos = minetest.get_pointed_thing_position(pointed_thing)
+		--don't get air node
 		if pos == nil then
 			return
 		else
