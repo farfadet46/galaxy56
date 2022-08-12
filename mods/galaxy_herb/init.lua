@@ -50,8 +50,9 @@ galaxy_herb.register_spike = function(color)
   
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass"},
-		sidelen = 16,
+		--place_on = {"default:dirt_with_grass"},
+		sidelen = 32,
+  --[[
 		noise_params = {
 			offset = -0.015,
 			scale = 0.03,
@@ -60,6 +61,7 @@ galaxy_herb.register_spike = function(color)
 			octaves = 3,
 			persist = 0.6
 		},
+  ]]--
 		biomes = {"grassland"},
 		y_min = -32000,
 		y_max = 32000,
