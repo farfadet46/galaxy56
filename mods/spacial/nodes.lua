@@ -12,6 +12,10 @@ minetest.register_node(mod_name .. ":UG", {
 	wield_image = "bloc_UG.png",
 	groups = {snappy=3},
 	--sounds = default.node_sound_wood_defaults(),
+ sounds = default.node_sound_wood_defaults({
+	--	footstep = {name="default_snow_footstep", gain=0.25},
+		dug = {name="default_dig_choppy", gain=0.75},
+	}),
 	
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local formspec = "size[7,3]"
@@ -33,6 +37,7 @@ minetest.register_node(mod_name .. ":bloc_commande1", {
 	tiles = {{name="bloc_commande1.png", animation={type="vertical_frames", aspect_w=32, aspect_h=32, length=2}},"bloc_commande_cote.png",},
 	inventory_image = "bloc_commande1.png",
 	groups = {snappy=3},
+ sounds = default.node_sound_stone_defaults(),
 })
 minetest.register_node(mod_name .. ":bloc_commande2", {
 	description = "Bloc de commande 2",
@@ -41,6 +46,7 @@ minetest.register_node(mod_name .. ":bloc_commande2", {
 	tiles = {"bloc_commande2.png","bloc_commande_cote.png",},
 	inventory_image = "bloc_commande1.png",
 	groups = {snappy=3},
+ sounds = default.node_sound_stone_defaults(),
 })
 minetest.register_node(mod_name .. ":bloc_commande3", {
 	description = "Bloc de commande 3",
@@ -49,4 +55,5 @@ minetest.register_node(mod_name .. ":bloc_commande3", {
 	tiles = {"bloc_commande3.png","bloc_commande_cote.png",},
 	inventory_image = "bloc_commande1.png",
 	groups = {snappy=3},
+ sounds = default.node_sound_stone_defaults(),
 })

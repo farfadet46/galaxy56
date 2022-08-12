@@ -14,8 +14,9 @@ end)
 
 dofile(modpath .. "/nodes.lua")
 dofile(modpath .. "/casque.lua")
-dofile(modpath .. "/laser.lua")
 dofile(modpath .. "/vaisseau.lua")
+--dofile(modpath .. "/laser.lua") --// TOO MUSH BUGGY \\--
+-- we can get air node and can't kill monster so desactivated for now.
 
 
 if minetest.setting_getbool("log_mods") then

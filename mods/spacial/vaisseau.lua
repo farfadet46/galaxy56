@@ -1,8 +1,12 @@
 local mod_name = minetest.get_current_modname()
 --local
---le vaisseau est créer au premier spawn du joueur par le fichier init.lua
---il spawne en position 1000,400,1000
---le joueurs doit etre spawn dedans :
+--le vaisseau est crée au premier spawn du joueur par le fichier init.lua
+--********************************
+-- the ship is created before the spawn of the player
+-- Spawn point : 1000,400,1000
+-- the player need to spawn in it
+--********************************
+
 local ship_pos_in = {x=10006, y=401, z=10009}
 local position_sol = {}
 
@@ -74,19 +78,20 @@ minetest.register_tool(mod_name ..":tp", {
 	end,
 	--click droit: Go vers le sol
 	on_place = function(pos, node, player, itemstack, pointed_thing)
-		print(player)
+		--print(player)
 		--local player_name = player.get_player_by_name(player)
 		--print(player_name)
 		
 		--player:setpos(position_sol)
 		--minetest.chat_send_player(player_name, "Teleported to the ground!")
-		print("ok")
+		--print("ok")
 		return
 	end,
 })
 
 
---attribution d'une commande pour ce TP au vaisseau spacial
+--attribution d'une commande pour se TP au vaisseau spacial
+--command to tp to the ship^
 minetest.register_chatcommand("ship", {
     description = "Teleport you into your Ship",
     func = function(name)
@@ -104,3 +109,7 @@ minetest.register_chatcommand("ship", {
 		minetest.chat_send_player(name, "Teleported to the ship!")
     end,
 })
+
+minetest.register_on_newplayer(function(player)
+player:get_inventory():add_item("main", mod_name..":tp")
+end)

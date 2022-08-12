@@ -43,7 +43,7 @@ minetest.register_tool( ":", {
 				if inv then
 					inv:add_item("main", node.name)
 					minetest.remove_node(pos)
-					minetest.sound_play("laser")
+					minetest.sound_play("laz")
 				end
 			end
 		end

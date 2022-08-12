@@ -3,7 +3,7 @@ local S = mobs.intllib
 
 -- mob spawner
 
-local spawner_default = "mobs_animal:pumba 10 15 0 0"
+local spawner_default = "mobs_animal:pumba 10 15 0 0 0"
 
 minetest.register_node("mobs:spawner", {
 	tiles = {"mob_spawner.png"},
@@ -17,9 +17,17 @@ minetest.register_node("mobs:spawner", {
 
 		local meta = minetest.get_meta(pos)
 
+		-- setup formspec
+		local head = S("(mob name) (min light) (max light) (amount)"
+				.. " (player distance) (Y offset)")
+
 		-- text entry formspec
 		meta:set_string("formspec",
-			"field[text;" .. S("Mob MinLight MaxLight Amount PlayerDist") .. ";${command}]")
+			"size[10,3.5]"
+			.. "label[0.15,0.5;" .. minetest.formspec_escape(head) .. "]"
+			.. "field[1,2.5;8.5,0.8;text;" .. S("Command:")
+			.. ";${command}]")
+
 		meta:set_string("infotext", S("Spawner Not Active (enter settings)"))
 		meta:set_string("command", spawner_default)
 	end,
@@ -53,11 +61,11 @@ minetest.register_node("mobs:spawner", {
 		local pla = tonumber(comm[5]) -- player distance (0 to disable)
 		local yof = tonumber(comm[6]) or 0 -- Y offset to spawn mob
 
-		if mob and mob ~= "" and mobs.spawning_mobs[mob] == true
+		if mob and mob ~= "" and mobs.spawning_mobs[mob]
 		and num and num >= 0 and num <= 10
 		and mlig and mlig >= 0 and mlig <= 15
 		and xlig and xlig >= 0 and xlig <= 15
-		and pla and pla >=0 and pla <= 20
+		and pla and pla >= 0 and pla <= 20
 		and yof and yof > -10 and yof < 10 then
 
 			meta:set_string("command", fields.text)
@@ -66,19 +74,28 @@ minetest.register_node("mobs:spawner", {
 		else
 			minetest.chat_send_player(name, S("Mob Spawner settings failed!"))
 			minetest.chat_send_player(name,
-				S("> name min_light[0-14] max_light[0-14] max_mobs_in_area[0 to disable] distance[1-20] y_offset[-10 to 10]"))
+				S("Syntax: “name min_light[0-14] max_light[0-14] max_mobs_in_area[0 to disable] player_distance[1-20] y_offset[-10 to 10]”"))
 		end
-	end,
+	end
 })
+
+
+local max_per_block = tonumber(minetest.settings:get("max_objects_per_block") or 99)
 
 -- spawner abm
 minetest.register_abm({
+	label = "Mob spawner node",
 	nodenames = {"mobs:spawner"},
 	interval = 10,
 	chance = 4,
 	catch_up = false,
 
 	action = function(pos, node, active_object_count, active_object_count_wider)
+
+		-- return if too many entities already
+		if active_object_count_wider >= max_per_block then
+			return
+		end
 
 		-- get meta and command
 		local meta = minetest.get_meta(pos)
@@ -97,17 +114,23 @@ minetest.register_abm({
 			return
 		end
 
+		-- are we spawning a registered mob?
+		if not mobs.spawning_mobs[mob] then
+			--print ("--- mob doesn't exist", mob)
+			return
+		end
+
 		-- check objects inside 9x9 area around spawner
 		local objs = minetest.get_objects_inside_radius(pos, 9)
 		local count = 0
-		local ent = nil
+		local ent
 
 		-- count mob objects of same type in area
-		for k, obj in pairs(objs) do
+		for _, obj in ipairs(objs) do
 
 			ent = obj:get_luaentity()
 
-			if ent and ent.name == mob then
+			if ent and ent.name and ent.name == mob then
 				count = count + 1
 			end
 		end
@@ -121,9 +144,9 @@ minetest.register_abm({
 		if pla > 0 then
 
 			local in_range = 0
-			local objs = minetest.get_objects_inside_radius(pos, pla)
+			local objsp = minetest.get_objects_inside_radius(pos, pla)
 
-			for _,oir in pairs(objs) do
+			for _, oir in pairs(objsp) do
 
 				if oir:is_player() then
 
@@ -139,11 +162,17 @@ minetest.register_abm({
 			end
 		end
 
+		-- set medium mob usually spawns in (defaults to air)
+		local reg = minetest.registered_entities[mob].fly_in
+
+		if not reg or type(reg) == "string" then
+			reg = {(reg or "air")}
+		end
+
 		-- find air blocks within 5 nodes of spawner
 		local air = minetest.find_nodes_in_area(
 			{x = pos.x - 5, y = pos.y + yof, z = pos.z - 5},
-			{x = pos.x + 5, y = pos.y + yof, z = pos.z + 5},
-			{"air"})
+			{x = pos.x + 5, y = pos.y + yof, z = pos.z + 5}, reg)
 
 		-- spawn in random air block
 		if air and #air > 0 then
@@ -154,10 +183,10 @@ minetest.register_abm({
 			pos2.y = pos2.y + 0.5
 
 			-- only if light levels are within range
-			if lig >= mlig and lig <= xlig then
+			if lig >= mlig and lig <= xlig
+			and minetest.registered_entities[mob] then
 				minetest.add_entity(pos2, mob)
 			end
 		end
-
 	end
 })
