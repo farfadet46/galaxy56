@@ -15,7 +15,7 @@ minetest.register_alias("mapgen_dirt", "default:dirt")
 minetest.register_alias("mapgen_dirt_with_grass", "default:dirt_with_grass")
 minetest.register_alias("mapgen_sand", "default:sand")
 minetest.register_alias("mapgen_gravel", "default:gravel")
-minetest.register_alias("mapgen_desert_stone", "default:desert_stone")
+--minetest.register_alias("mapgen_desert_stone", "default:desert_stone")
 minetest.register_alias("mapgen_desert_sand", "default:desert_sand")
 minetest.register_alias("mapgen_dirt_with_snow", "default:dirt_with_snow")
 minetest.register_alias("mapgen_snowblock", "default:snowblock")
@@ -34,7 +34,7 @@ minetest.register_alias("mapgen_pine_needles", "default:pine_needles")
 minetest.register_alias("mapgen_cobble", "default:cobble")
 minetest.register_alias("mapgen_stair_cobble", "stairs:stair_cobble")
 minetest.register_alias("mapgen_mossycobble", "default:mossycobble")
-minetest.register_alias("mapgen_stair_desert_stone", "stairs:stair_desert_stone")
+--minetest.register_alias("mapgen_stair_desert_stone", "stairs:stair_desert_stone")
 
 
 --
@@ -241,7 +241,7 @@ function default.register_mgv6_ores()
 	})
 
 	-- Tin
-
+--[[
 	minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "default:stone_with_tin",
@@ -274,7 +274,7 @@ function default.register_mgv6_ores()
 		y_max          = -128,
 		y_min          = -31000,
 	})
-
+]]--
 	-- Gold
 
 	minetest.register_ore({
@@ -414,7 +414,7 @@ function default.register_ores()
 	-- These obviously first.
 
 	-- Silver sandstone
-
+--[[
 	minetest.register_ore({
 		ore_type        = "stratum",
 		ore             = "default:silver_sandstone",
@@ -450,9 +450,9 @@ function default.register_ores()
 		stratum_thickness = 2,
 		biomes = {"cold_desert"},
 	})
-
+]]--
 	-- Desert sandstone
-
+--[[
 	minetest.register_ore({
 		ore_type        = "stratum",
 		ore             = "default:desert_sandstone",
@@ -488,7 +488,7 @@ function default.register_ores()
 		stratum_thickness = 2,
 		biomes = {"desert"},
 	})
-
+]]--
 	-- Sandstone
 
 	minetest.register_ore({
@@ -534,7 +534,7 @@ function default.register_ores()
 	})
 
 	-- Silver sand
-
+--[[
 	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "default:silver_sand",
@@ -553,7 +553,7 @@ function default.register_ores()
 			persist = 0.0
 		},
 	})
-
+]]--
 	-- Dirt
 
 	minetest.register_ore({
@@ -603,7 +603,7 @@ function default.register_ores()
 	-- Scatter ores
 
 	-- Coal
-
+--[[
 	minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "default:stone_with_coal",
@@ -636,9 +636,9 @@ function default.register_ores()
 		y_max          = -128,
 		y_min          = -31000,
 	})
-
+]]--
 	-- Tin
-
+--[[
 	minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "default:stone_with_tin",
@@ -671,7 +671,7 @@ function default.register_ores()
 		y_max          = -128,
 		y_min          = -31000,
 	})
-
+]]--
 	-- Copper
 
 	minetest.register_ore({
@@ -1434,7 +1434,7 @@ function default.register_biomes()
 	})
 
 	-- Cold desert
-
+--[[
 	minetest.register_biome({
 		name = "cold_desert",
 		node_top = "default:silver_sand",
@@ -1451,7 +1451,7 @@ function default.register_biomes()
 		heat_point = 40,
 		humidity_point = 0,
 	})
-
+]]--
 	minetest.register_biome({
 		name = "cold_desert_ocean",
 		node_top = "default:sand",
@@ -1484,7 +1484,7 @@ function default.register_biomes()
 	})
 
 	-- Savanna
-
+--[[
 	minetest.register_biome({
 		name = "savanna",
 		node_top = "default:dry_dirt_with_dry_grass",
@@ -1549,7 +1549,7 @@ function default.register_biomes()
 		heat_point = 89,
 		humidity_point = 42,
 	})
-
+]]--
 	-- Rainforest
 
 	minetest.register_biome({
@@ -1674,7 +1674,7 @@ function default.register_mgv6_decorations()
 	})
 
 	-- Long grasses
-
+--[[
 	for length = 1, 5 do
 		minetest.register_decoration({
 			name = "default:grass_"..length,
@@ -1694,6 +1694,60 @@ function default.register_mgv6_decorations()
 			decoration = "default:grass_"..length,
 		})
 	end
+]]--
+minetest.register_decoration({
+  name = "default:grass_blue",
+  deco_type = "simple",
+  place_on = {"default:dirt_with_grass"},
+  sidelen = 16,
+  noise_params = {
+   offset = 0,
+   scale = 0.007,
+   spread = {x = 100, y = 100, z = 100},
+   seed = 329,
+   octaves = 3,
+   persist = 0.6
+  },
+  y_max = 30,
+  y_min = 1,
+  decoration = "default:grass_blue",
+ })
+ 
+minetest.register_decoration({
+  name = "default:grass_red",
+  deco_type = "simple",
+  place_on = {"default:dirt_with_grass"},
+  sidelen = 16,
+  noise_params = {
+   offset = 0,
+   scale = 0.007,
+   spread = {x = 100, y = 100, z = 100},
+   seed = 329,
+   octaves = 3,
+   persist = 0.6
+  },
+  y_max = 30,
+  y_min = 1,
+  decoration = "default:grass_red",
+ })
+ 
+ minetest.register_decoration({
+  name = "default:grass_grey",
+  deco_type = "simple",
+  place_on = {"default:dirt_with_grass"},
+  sidelen = 16,
+  noise_params = {
+   offset = 0,
+   scale = 0.007,
+   spread = {x = 100, y = 100, z = 100},
+   seed = 329,
+   octaves = 3,
+   persist = 0.6
+  },
+  y_max = 30,
+  y_min = 1,
+  decoration = "default:grass_grey",
+ })
 
 	-- Dry shrubs
 
@@ -1719,7 +1773,7 @@ end
 
 
 -- All mapgens except mgv6
-
+--[[
 local function register_grass_decoration(offset, scale, length)
 	minetest.register_decoration({
 		name = "default:grass_" .. length,
@@ -1740,7 +1794,8 @@ local function register_grass_decoration(offset, scale, length)
 		decoration = "default:grass_" .. length,
 	})
 end
-
+]]--
+--[[
 local function register_dry_grass_decoration(offset, scale, length)
 	minetest.register_decoration({
 		name = "default:dry_grass_" .. length,
@@ -1761,7 +1816,7 @@ local function register_dry_grass_decoration(offset, scale, length)
 		decoration = "default:dry_grass_" .. length,
 	})
 end
-
+]]--
 local function register_fern_decoration(seed, length)
 	minetest.register_decoration({
 		name = "default:fern_" .. length,
@@ -1789,7 +1844,7 @@ function default.register_decorations()
 	-- Must come before all savanna decorations that are placed on dry grass.
 	-- Noise is similar to long dry grass noise, but scale inverted, to appear
 	-- where long dry grass is least dense and shortest.
-
+--[[
 	minetest.register_decoration({
 		deco_type = "simple",
 		place_on = {"default:dry_dirt_with_dry_grass"},
@@ -1809,7 +1864,7 @@ function default.register_decorations()
 		place_offset_y = -1,
 		flags = "force_placement",
 	})
-
+]]--
 	-- Apple tree and log
 
 	minetest.register_decoration({
@@ -1944,7 +1999,7 @@ function default.register_decorations()
 	})
 
 	-- Taiga and temperate coniferous forest pine tree, small pine tree and log
-
+--[[
 	minetest.register_decoration({
 		name = "default:pine_tree",
 		deco_type = "schematic",
@@ -2001,9 +2056,9 @@ function default.register_decorations()
 		spawn_by = {"default:dirt_with_snow", "default:dirt_with_coniferous_litter"},
 		num_spawn_by = 8,
 	})
-
+]]--
 	-- Acacia tree and log
-
+--[[
 	minetest.register_decoration({
 		name = "default:acacia_tree",
 		deco_type = "schematic",
@@ -2048,9 +2103,9 @@ function default.register_decorations()
 		spawn_by = "default:dry_dirt_with_dry_grass",
 		num_spawn_by = 8,
 	})
-
+]]--
 	-- Aspen tree and log
-
+--[[
 	minetest.register_decoration({
 		name = "default:aspen_tree",
 		deco_type = "schematic",
@@ -2094,7 +2149,7 @@ function default.register_decorations()
 		spawn_by = "default:dirt_with_grass",
 		num_spawn_by = 8,
 	})
-
+]]--
 	-- Large cactus
 
 	minetest.register_decoration({
@@ -2165,7 +2220,7 @@ function default.register_decorations()
 	})
 
 	-- Dry dirt version for savanna shore
-
+--[[
 	minetest.register_decoration({
 		name = "default:papyrus_on_dry_dirt",
 		deco_type = "schematic",
@@ -2185,9 +2240,9 @@ function default.register_decorations()
 		schematic = minetest.get_modpath("default") ..
 			"/schematics/papyrus_on_dry_dirt.mts",
 	})
-
+]]--
 	-- Bush
-
+--[[
 	minetest.register_decoration({
 		name = "default:bush",
 		deco_type = "schematic",
@@ -2274,23 +2329,23 @@ function default.register_decorations()
 		schematic = minetest.get_modpath("default") .. "/schematics/pine_bush.mts",
 		flags = "place_center_x, place_center_z",
 	})
-
+]]--
 	-- Grasses
-
+--[[
 	register_grass_decoration(-0.03,  0.09,  5)
 	register_grass_decoration(-0.015, 0.075, 4)
 	register_grass_decoration(0,      0.06,  3)
 	register_grass_decoration(0.015,  0.045, 2)
 	register_grass_decoration(0.03,   0.03,  1)
-
+]]--
 	-- Dry grasses
-
+--[[
 	register_dry_grass_decoration(0.01, 0.05,  5)
 	register_dry_grass_decoration(0.03, 0.03,  4)
 	register_dry_grass_decoration(0.05, 0.01,  3)
 	register_dry_grass_decoration(0.07, -0.01, 2)
 	register_dry_grass_decoration(0.09, -0.03, 1)
-
+]]--
 	-- Ferns
 
 	register_fern_decoration(14936, 3)
@@ -2312,7 +2367,7 @@ function default.register_decorations()
 	})
 
 	-- Dry shrub
-
+--[[
 	minetest.register_decoration({
 		name = "default:dry_shrub",
 		deco_type = "simple",
@@ -2333,9 +2388,9 @@ function default.register_decorations()
 		decoration = "default:dry_shrub",
 		param2 = 4,
 	})
-
+]]--
 	-- Marram grass
-
+--[[
 	minetest.register_decoration({
 		name = "default:marram_grass",
 		deco_type = "simple",
@@ -2359,7 +2414,7 @@ function default.register_decorations()
 			"default:marram_grass_3",
 		},
 	})
-
+]]--
 	-- Tundra moss
 
 	minetest.register_decoration({

@@ -15,7 +15,7 @@ end)
 dofile(modpath .. "/nodes.lua")
 dofile(modpath .. "/casque.lua")
 dofile(modpath .. "/vaisseau.lua")
---dofile(modpath .. "/laser.lua") --// TOO MUSH BUGGY \\--
+dofile(modpath .. "/laser.lua")
 -- we can get air node and can't kill monster so desactivated for now.
 
 

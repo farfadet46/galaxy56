@@ -26,7 +26,7 @@ end
 	
 function enleve_casque(player)
 	local numParticles =  100
-	local playerPos = player:getpos()
+	local playerPos = player:get_pos()
 	
 	player:hud_remove(casque[player:get_player_name()])
 		
@@ -35,8 +35,8 @@ function enleve_casque(player)
 			pos = {x=playerPos["x"]+math.random(-1,1)*math.random()/2,y=playerPos["y"]+1.5,z=playerPos["z"]+math.random(-1,1)*math.random()/2},
 			--pos = {x=0, y=0, z=0},
 			--vel = {x=0, y=5, z=0},
-			vel = {x=math.random(-5,5), y=math.random(-5,5), z=math.random(-5,5)},
-			acc = {x=0, y=-13, z=0},
+			velocity = {x=math.random(-5,5), y=math.random(-5,5), z=math.random(-5,5)},
+			acceleration = {x=0, y=-13, z=0},
 			expirationtime = math.random(),
 			size = math.random()+0.5,
 			collisiondetection = false,
@@ -61,42 +61,3 @@ unified_inventory.register_button("casque", {
 		end
 	end,
 })
-
---[[
-minetest.register_chatcommand("casque",{
-	desciption = "porter / enlever le casque",
-		func = function( name , param)
-		local player = minetest.get_player_by_name(name)
-		
--- Si le joueur veut porter son casque
-			if param == "on" then 
-				if casque_actif == true then
-					minetest.chat_send_player(name,"Vous portez deja votre casque")
-					return
-				elseif casque_actif == false then					
-					porte_casque(player)
-					minetest.chat_send_player(name,"Vous avez mis votre casque")
-					return
-				end
-				
--- Sinon si le joueur veut enlever son casque
-			elseif param == "off" then
-				if casque_actif == true then --on porte le casque
-					enleve_casque(player)
-					minetest.chat_send_player(name,"Vous avez enlevé votre casque")
-					return
-				elseif casque_actif == false then --on ne porte pas le casque
-					minetest.chat_send_player(name,"Vous ne portez pas encore votre casque")
-					return
-				end
-				
--- Sinon si erreur dans la commande
-			else
-				minetest.chat_send_player(name,"Veauillez utiliser la commande '/casque' suivie de 'on' ou 'off' pour porter/enlever votre casque.")
-				return
-			end
-		
-		return true
-	end,
-	})
-]]--
